@@ -1,0 +1,111 @@
+openapi: 3.0.0
+info:
+  title: Upload API
+  version: 1.0.0
+paths:
+  /v1/upload:
+    post:
+      summary: Upload images
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  part:
+                    type: integer
+                  etag:
+                    type: string
+                required:
+                  - part
+                  - etag
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  timestamp:
+                    type: integer
+                  source:
+                    type: string
+                  folder:
+                    type: null
+                  height:
+                    type: integer
+                  width:
+                    type: integer
+                  mime:
+                    type: string
+                  display:
+                    type: object
+                    properties:
+                      thumbnail:
+                        type: object
+                        properties:
+                          width:
+                            type: integer
+                          height:
+                            type: integer
+                          src:
+                            type: string
+                      preview:
+                        type: object
+                        properties:
+                          width:
+                            type: integer
+                          height:
+                            type: integer
+                          src:
+                            type: string
+                      square:
+                        type: object
+                        properties:
+                          width:
+                            type: integer
+                          height:
+                            type: integer
+                          src:
+                            type: string
+                      original:
+                        type: object
+                        properties:
+                          width:
+                            type: integer
+                          height:
+                            type: integer
+                          src:
+                            type: string
+                  metadata:
+                    type: object
+                    properties:
+                      gps:
+                        type: string
+                      datetime:
+                        type: integer
+                      name:
+                        type: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errorCode:
+                    type: integer
+                  userMessage:
+                    type: string
+                  devMessage:
+                    type: string
+                  more:
+                    type: string
+                  applicationCode:
+                    type: string
